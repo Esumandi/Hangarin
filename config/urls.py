@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from hangarin.views import home
+from hangarin.views import HomePageView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),
+    path('', HomePageView.as_view(), name='home'),
     path('', include('hangarin.urls')),
 ]

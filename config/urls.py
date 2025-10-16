@@ -26,4 +26,5 @@ urlpatterns = [
     path('', RedirectView.as_view(pattern_name='account_login', permanent=False)),
     path('', include('hangarin.urls')),
     path("accounts/", include("allauth.urls")), # allauth routes
+    path('', include('pwa.urls')),
 ]

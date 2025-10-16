@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hangarin',
     'widget_tweaks',
+    'pwa',
 
 
      'django.contrib.sites',
@@ -62,13 +63,9 @@ AUTHENTICATION_BACKENDS = [
 'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+# Use a single, consistent timezone setting
 TIME_ZONE = 'Asia/Manila'
 USE_TZ = True
-
-import os
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 
 
 MIDDLEWARE = [
@@ -138,11 +135,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# Keep TIME_ZONE consistent with earlier definition
+# TIME_ZONE defined above
 
 USE_I18N = True
 
-USE_TZ = True
+# USE_TZ defined above
 
 
 # Static files (CSS, JavaScript, Images)
@@ -150,7 +148,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = (BASE_DIR / 'static',)
+# Rely on app-level static directories; omit extra STATICFILES_DIRS to avoid warnings
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -169,3 +167,36 @@ ACCOUNT_SIGNUP_FIELDS = [
 "password1*",
 "password2*",
 ]
+
+PWA_APP_NAME = 'Hangarin'
+PWA_APP_DESCRIPTION = "A Progressive Web App version of Hangarin"
+PWA_APP_THEME_COLOR = '#0A0A0A'
+PWA_APP_BACKGROUND_COLOR = '#FFFFFF'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'portrait'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+{
+'src': '/static/img/menu.png',
+'sizes': '192x192'
+},
+{
+'src': '/static/img/profile.jpg',
+'sizes': '512x512'
+}
+]
+PWA_APP_ICONS_APPLE = [
+{
+'src': '/static/img/menu.png',
+'sizes': '192x192'
+},
+{
+'src': '/static/img/profile.jpg',
+'sizes': '512x512'
+}
+]
+PWA_APP_DIR = 'ltr'
+# Point to the existing app-level service worker file
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'hangarin', 'static/js', 'serviceworker.js')
